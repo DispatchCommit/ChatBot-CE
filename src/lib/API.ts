@@ -3,7 +3,7 @@ import * as rp from "request-promise";
 export class API {
     private headers = {};
     private urlBase = "https://www.stream.me";
-    private urlAPICommand = this.urlBase + "/api-commands/v1/room/${this.roomId}/command/"
+    private urlAPICommand = this.urlBase + "/api-commands/v1/room/" + this.roomId + "/command/"
     
     constructor(private bearer_token: string, public roomId: string) {
         this.headers = {
