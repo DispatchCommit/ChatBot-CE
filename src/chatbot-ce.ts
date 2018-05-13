@@ -33,8 +33,13 @@ websocketClient.addListener("connect", (connection) => {
         },
         json: true
     }).then((response) => {
-        botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
         authorizeSpinner.succeed("Bot authorized and access token has been obtained.");
+
+        botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
+        new Ora("Bot API initiated and ready to go!").succeed();
+
+        botHelper = new BotHelper(process.env.COMMAND_PREFIX);
+        new Ora("Bot helpers initiated and ready to go!").succeed();
 
         connection.addListener("message", (message) => {
             //
