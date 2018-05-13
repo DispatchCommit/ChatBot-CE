@@ -3,14 +3,17 @@ require("dotenv").config();
 import * as WebSocket from "websocket";
 import * as Ora from "ora";
 import chalk from "chalk";
-import { API as BotAPI } from "./lib/API";
 import * as rp from "request-promise";
+import { API as BotAPI } from "./lib/API";
+import { Helper as BotHelper } from "./lib/Helpers";
+
 
 // Variables
 const log = require('logger').createLogger('./logs/latest.log')
 let websocketClient = new WebSocket.client();
 let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
+let botHelper: BotHelper;
 
 spinner.start();
 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
