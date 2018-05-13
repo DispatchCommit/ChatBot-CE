@@ -3,7 +3,7 @@ require("dotenv").config();
 import * as WebSocket from "websocket";
 import * as Ora from "ora";
 import chalk from "chalk";
-import { API as BotAPI} from "./lib/API";
+import { API as BotAPI } from "./lib/API";
 import * as rp from "request-promise";
 
 // Variables
@@ -56,7 +56,3 @@ websocketClient.addListener("connectFailed", (error) => {
     spinner.fail("Failed to connect to StreamMe socket server.");
     log.error(error.message);
 });
-
-function authorizeBot() {
-    
-}
