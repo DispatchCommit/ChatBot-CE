@@ -18,11 +18,21 @@ export class API {
      * @param string message
      * @returns json
      */
-    public say(message: string) {
-        /*rp({
-            method: "POST", 
-            uri: this.urlAPICommand + "say"
-        })*/
-        console.log('Testing')
+    public say(message: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            rp({
+                method: "POST",
+                uri: this.urlAPICommand + "say",
+                body: {
+                    message: message,
+                },
+                headers: this.headers,
+                json: true,
+            }).then((response: any) => {
+                resolve(response);
+            }).catch((error: any) => {
+                reject(error);
+            });
+        });
     }
 }
