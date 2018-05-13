@@ -6,8 +6,9 @@
   "typings": "dist/chatbot-ce",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run compile && npm run start",
     "clean": "rm -rf ./dist/*",
-    "compile": "tsc -p . && npm run start",
+    "compile": "tsc -p .",
     "start": "node ./dist/chatbot-ce.js"
   },
   "repository": {
