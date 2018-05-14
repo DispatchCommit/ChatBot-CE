@@ -5,7 +5,6 @@ import * as Ora from "ora";
 import chalk from "chalk";
 import * as rp from "request-promise";
 import { API as BotAPI } from "./lib/API";
-import { Helper as BotHelper } from "./lib/Helpers";
 
 
 // Variables
@@ -13,7 +12,6 @@ const log = require('logger').createLogger('./logs/latest.log')
 let websocketClient = new WebSocket.client();
 let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
-let botHelper: BotHelper;
 
 spinner.start();
 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
@@ -37,9 +35,6 @@ websocketClient.addListener("connect", (connection) => {
 
         botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
         new Ora("Bot API initiated and ready to go!").succeed();
-
-        botHelper = new BotHelper(process.env.COMMAND_PREFIX);
-        new Ora("Bot helpers initiated and ready to go!").succeed();
 
         connection.addListener("message", (message) => {
             //
