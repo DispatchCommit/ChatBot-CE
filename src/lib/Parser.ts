@@ -12,7 +12,7 @@ export class Parser {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
         new Ora("Bot helpers initiated and ready to go!").succeed();
 
-        this.loadAddons();
+        //this.loadAddons();
     }
 
     public parse(message: Message) {
