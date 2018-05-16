@@ -22,6 +22,31 @@ export class Parser {
     }
 
     /**
+     * Function to take the raw UTF8 data from the message event and parse it into the Message
+     * interface.
+     * 
+     * @param {any} data 
+     */
+    public parseUTF8(data: any) {
+        data = JSON.parse(data);
+        
+        if(data.type == "chat") {
+            let chatMessage: ChatMessage = {
+                type: <string> data.type,
+                room: <string> data.room,
+                roomId: <string> data.roomId,
+                message: <string> data.data[2],
+                messageId: <number> data.data[1],
+                createdAt: <number> data.data[8],
+                username: <string> data.data[3][1],
+                userId: <string> data.data[3][7]
+            }
+
+            this.parse(chatMessage);
+        }
+    }
+
+    /**
      * Takes an instance of an interface that extends the base Message interface and figures 
      * out how to properly handle that message.
      * 
