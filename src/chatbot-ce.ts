@@ -42,7 +42,11 @@ websocketClient.addListener("connect", (connection) => {
         new Ora("Bot parser initiated and ready to go!").succeed();
 
         connection.addListener("message", (message) => {
-            //
+            if(message.type.toLowerCase() == "utf8") {
+                if(message.utf8Data.startsWith("chat message")) {
+                    botParser.parseUTF8(message.utf8Data.split("chat message ")[1]);
+                }
+            }
         });
     
         connection.addListener("close", (code, description) => {
