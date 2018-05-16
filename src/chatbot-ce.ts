@@ -49,6 +49,7 @@ websocketClient.addListener("connect", (connection) => {
             console.log(chalk.red("WebSocket connection closed."));
             console.log(chalk.red("Code: " + code));
             console.log(chalk.red("Description: " + description));
+            log.info("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
             process.exit(0);
         });
     
