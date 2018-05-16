@@ -1,4 +1,5 @@
 import { Helper as BotHelper } from "./Helpers";
+import { Message, ChatMessage } from "./MessageInterfaces";
 import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
