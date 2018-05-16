@@ -20,10 +20,24 @@ export class Parser {
     }
 
     private loadAddons(): void {
-        //let addonSpinner = new Ora("Loading bot addons.").start();
+        let addonSpinner = new Ora("Loading bot addons.").start();
         let addonFolders = this.getFolders(process.env.ADDON_FOLDER);
-        console.log(process.env.ADDON_FOLDER);
-        console.log(addonFolders);
+        
+        for (let index = 0; index < addonFolders.length; index++) {
+            const element = addonFolders[index];
+            let addon;
+
+            try {
+                let module = process.env.ADDON_FOLDER + "/" + element;
+                addon = require(module);
+                new Ora("Successfully required '" + element + "'").succeed();
+            } catch (error) {
+                new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
+                continue;
+            }
+        }
+
+        addonSpinner.succeed("Addons loaded.");
     }
 
     private getFolders(folderPath: string) {
