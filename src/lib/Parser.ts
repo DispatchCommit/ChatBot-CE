@@ -9,6 +9,11 @@ export class Parser {
     public helper: BotHelper;
     public commands = {};
 
+    /**
+     * Represents a parser.
+     * 
+     * @constructor
+     */
     constructor() {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
         new Ora("Bot helpers initiated and ready to go!").succeed();
@@ -16,6 +21,12 @@ export class Parser {
         //this.loadAddons();
     }
 
+    /**
+     * Takes an instance of an interface that extends the base Message interface and figures 
+     * out how to properly handle that message.
+     * 
+     * @param {Message} message
+     */
     public parse(message: Message) {
         
     }
