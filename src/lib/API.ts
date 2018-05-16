@@ -19,16 +19,20 @@ export class API {
      * @returns json
      */
     public say(message: string): Promise<any> {
+        return this.makeRequest({
+            method: "POST",
+            uri: this.urlAPICommand + "say",
+            body: {
+                message: message,
+            },
+            headers: this.headers,
+            json: true,
+        });
+    }
+
+    private makeRequest(options: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            rp({
-                method: "POST",
-                uri: this.urlAPICommand + "say",
-                body: {
-                    message: message,
-                },
-                headers: this.headers,
-                json: true,
-            }).then((response: any) => {
+            rp(options).then((response: any) => {
                 resolve(response);
             }).catch((error: any) => {
                 reject(error);
