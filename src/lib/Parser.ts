@@ -79,7 +79,7 @@ export class Parser {
             let addon;
 
             try {
-                let module = process.env.ADDON_FOLDER + "/" + element;
+                let module = path.resolve(process.env.ADDON_FOLDER + "/" + element)
                 addon = require(module);
                 new Ora("Successfully required '" + element + "'").succeed();
             } catch (error) {
