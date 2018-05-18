@@ -81,7 +81,8 @@ export class Parser {
             try {
                 let module = path.resolve(process.env.ADDON_FOLDER + "/" + element)
                 addon = require(module);
-                new Ora("Successfully required '" + element + "'").succeed();
+
+                new Ora("Successfully required addon '" + element + "'").succeed();
             } catch (error) {
                 new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
                 continue;
