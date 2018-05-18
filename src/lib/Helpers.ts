@@ -12,4 +12,16 @@ export class Helper {
     public isNumber(input: any): boolean {
         return !isNaN(parseFloat(input)) && isFinite(input);    
     }
+
+    public hasParams(input: string): boolean {
+        return this.numParams(input) > 0;
+    }
+
+    public numParams(input: string): number {
+        return input.split(" ").length-1;
+    }
+
+    public getParams(input: string): string[] {
+        return input.split(" ").slice(1);
+    }
 }
