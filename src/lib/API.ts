@@ -5,6 +5,13 @@ export class API {
     private urlBase = "https://www.stream.me";
     private urlAPICommand = this.urlBase + "/api-commands/v1/room/" + this.roomId + "/command/"
     
+    /**
+     * A constructor for the bot API.
+     * 
+     * @constructor
+     * @param {string} bearer_token The access beaerer token gotten from bot authorization route from StreamMe.
+     * @param {string} roomId The user's room id to send data too.
+     */
     constructor(private bearer_token: string, public roomId: string) {
         this.headers = {
             "Authorization" : "Bearer " + this.bearer_token,
@@ -15,8 +22,8 @@ export class API {
     /**
      * Send a message to the chat.
      * 
-     * @param string message
-     * @returns json
+     * @param {string} message The message you want to send to the chat.
+     * @returns {Promise}
      */
     public say(message: string): Promise<any> {
         return this.makeRequest({
@@ -30,6 +37,11 @@ export class API {
         });
     }
 
+    /**
+     * A generic method to return a new Promise request.
+     * 
+     * @param {any} options A JSON object to pass through to request.
+     */
     private makeRequest(options: any): Promise<any> {
         return new Promise((resolve, reject) => {
             rp(options).then((response: any) => {

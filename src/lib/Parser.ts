@@ -12,9 +12,10 @@ export class Parser {
     public commands: any;
 
     /**
-     * Represents a parser.
+     * The constructor for the bot parser.
      * 
      * @constructor
+     * @param {BotAPI} botAPI An instance of the bot API.
      */
     constructor(botAPI: BotAPI) {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
@@ -30,9 +31,9 @@ export class Parser {
      * Function to take the raw UTF8 data from the message event and parse it into the Message
      * interface.
      * 
-     * @param {any} data 
+     * @param {any} data Raw UTF8 data to parse.
      */
-    public parseUTF8(data: any) {
+    public parseUTF8(data: any): void {
         data = JSON.parse(data);
         
         if(data.type == "chat") {
@@ -55,9 +56,9 @@ export class Parser {
      * Takes an instance of an interface that extends the base Message interface and figures 
      * out how to properly handle that message.
      * 
-     * @param {IMessage} message
+     * @param {IMessage} message The message to parse.
      */
-    public parse(IMessage: IMessage) {
+    public parse(IMessage: IMessage): void {
         if(IMessage.type === "chat") {
             let message: IChatMessage = <IChatMessage> IMessage;
 
