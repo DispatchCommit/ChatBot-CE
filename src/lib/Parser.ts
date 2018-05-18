@@ -9,7 +9,7 @@ import chalk from "chalk";
 export class Parser {
     public helper: BotHelper;
     public api: BotAPI;
-    public commands = {};
+    public commands: any;
 
     /**
      * Represents a parser.
@@ -19,6 +19,7 @@ export class Parser {
     constructor(botAPI: BotAPI) {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
         this.api = botAPI;
+        this.commands = {};
 
         new Ora("Bot helpers initiated and ready to go!").succeed();
 
