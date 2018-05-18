@@ -9,7 +9,7 @@ import { Parser as BotParser } from "./lib/Parser";
 
 
 // Variables
-const log = require('logger').createLogger('./logs/latest.log')
+const log = require('logger-alt').createLogger('./logs/latest.log')
 let websocketClient = new WebSocket.client();
 let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
