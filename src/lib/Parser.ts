@@ -1,6 +1,6 @@
 import { Helper as BotHelper } from "./Helpers";
-import { Message, ChatMessage } from "./MessageInterfaces";
 import { API as BotAPI } from "./API";
+import { IMessage, IChatMessage } from "./MessageInterfaces";
 import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
@@ -35,7 +35,7 @@ export class Parser {
         data = JSON.parse(data);
         
         if(data.type == "chat") {
-            let chatMessage: ChatMessage = {
+            let chatMessage: IChatMessage = {
                 type: <string> data.type,
                 room: <string> data.room,
                 roomId: <string> data.roomId,
@@ -54,10 +54,9 @@ export class Parser {
      * Takes an instance of an interface that extends the base Message interface and figures 
      * out how to properly handle that message.
      * 
-     * @param {Message} message
+     * @param {IMessage} message
      */
-    public parse(message: Message) {
-        
+    public parse(IMessage: IMessage) {
     }
 
     private loadAddons(): void {
