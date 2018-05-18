@@ -64,8 +64,10 @@ export class Parser {
             if(this.helper.isCommand(message.message)) {
                 let command = this.helper.getCommand(message.message).toLowerCase();
                 let parameters = this.helper.hasParams(message.message) ? this.helper.getParams(message.message) : null;
-
-                // Pass the message along to the addons
+                
+                if(this.commands[command]) {
+                    this.commands[command].execute(command, parameters, message);
+                }
             }
         }
     }
