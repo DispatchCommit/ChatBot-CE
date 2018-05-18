@@ -87,6 +87,14 @@ export class Parser {
                 if("constructor" in addon) {
                     addon.constructor(this.api, this.helper);
                 }
+
+                if("commands" in addon) {
+                    for(let commandIndex = 0; commandIndex < addon.commands.length; commandIndex++) {
+                        if(addon.commands[commandIndex] in addon) {
+                            this.commands[addon.commands[commandIndex]] = addon[addon.commands[commandIndex]];
+                        }
+                    }
+                }
             } catch (error) {
                 new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
                 continue;
