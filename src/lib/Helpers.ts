@@ -6,7 +6,7 @@ export class Helper {
     }
 
     public isCommand(input: string): boolean {
-        return (input.toLowerCase().substr(0, this.commandPrefix.length) === this.commandPrefix);
+        return (input.toLowerCase().substr(0, this.commandPrefix.length) === this.commandPrefix) && (this.getCommand(input).length > 0);
     }
 
     public isNumber(input: any): boolean {
