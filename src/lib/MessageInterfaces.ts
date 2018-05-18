@@ -1,10 +1,10 @@
-export interface Message {
+export interface IMessage {
     type: string;
     room: string;
     roomId: string;
 }
 
-export interface ChatMessage extends Message {
+export interface IChatMessage extends IMessage {
     message: string;
     messageId: number;
     user?: any[];
@@ -13,7 +13,7 @@ export interface ChatMessage extends Message {
     createdAt: number;
 }
 
-export interface EraseMessage extends Message {
+export interface IEraseMessage extends IMessage {
     messageIds: number[];
     removedBy: {
         username: string;
