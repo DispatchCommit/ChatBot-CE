@@ -83,6 +83,10 @@ export class Parser {
                 addon = require(module);
 
                 new Ora("Successfully required addon '" + element + "'").succeed();
+                
+                if("constructor" in addon) {
+                    addon.constructor(this.api, this.helper);
+                }
             } catch (error) {
                 new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
                 continue;
