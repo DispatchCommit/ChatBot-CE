@@ -38,7 +38,7 @@ websocketClient.addListener("connect", (connection) => {
         botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
         new Ora("Bot API initiated and ready to go!").succeed();
 
-        botParser = new BotParser();
+        botParser = new BotParser(botAPI);
         new Ora("Bot parser initiated and ready to go!").succeed();
 
         connection.addListener("message", (message) => {

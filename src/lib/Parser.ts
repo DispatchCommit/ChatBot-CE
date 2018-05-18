@@ -1,5 +1,6 @@
 import { Helper as BotHelper } from "./Helpers";
 import { Message, ChatMessage } from "./MessageInterfaces";
+import { API as BotAPI } from "./API";
 import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
@@ -7,6 +8,7 @@ import chalk from "chalk";
 
 export class Parser {
     public helper: BotHelper;
+    public api: BotAPI;
     public commands = {};
 
     /**
@@ -14,8 +16,10 @@ export class Parser {
      * 
      * @constructor
      */
-    constructor() {
+    constructor(botAPI: BotAPI) {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
+        this.api = botAPI;
+
         new Ora("Bot helpers initiated and ready to go!").succeed();
 
         //this.loadAddons();
