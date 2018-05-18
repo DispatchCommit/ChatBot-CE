@@ -10,7 +10,8 @@
     "build": "npm run compile && npm run start",
     "clean": "rm -rf ./dist/*",
     "compile": "tsc -p .",
-    "start": "node ./dist/chatbot-ce.js"
+    "start": "node ./dist/chatbot-ce.js",
+    "generate-docs": "node_modules/.bin/typedoc --out ./docs/ --hideGenerator --target \"es5\" --module \"commonjs\" --name \"Marked Bots - ChatBot CE\""
   },
   "repository": {
     "type": "git",
@@ -29,10 +30,13 @@
     "@types/websocket": "0.0.39",
     "chalk": "^2.4.1",
     "dotenv": "^5.0.1",
-    "logger": "git+https://github.com/MatthewSH/node-logger.git",
+    "logger-alt": "0.0.1",
     "ora": "^2.1.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
     "websocket": "^1.0.26"
+  },
+  "devDependencies": {
+    "typedoc": "^0.11.1"
   }
 }
