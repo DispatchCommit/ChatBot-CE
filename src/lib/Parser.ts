@@ -70,7 +70,7 @@ export class Parser {
     }
 
     private loadAddons(): void {
-        let addonSpinner = new Ora("Loading bot addons.").start();
+        let addonSpinner = new Ora("Loading bot addons.");
         let addonFolders = this.getFolders(process.env.ADDON_FOLDER);
         
         for (let index = 0; index < addonFolders.length; index++) {
