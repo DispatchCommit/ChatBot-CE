@@ -2,6 +2,7 @@
   "name": "chatbot-ce",
   "version": "1.0.0-beta",
   "description": "A community chat bot for StreamMe",
+  "private": true,
   "main": "dist/chatbot-ce",
   "typings": "dist/chatbot-ce",
   "scripts": {
