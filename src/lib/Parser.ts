@@ -23,7 +23,7 @@ export class Parser {
 
         new Ora("Bot helpers initiated and ready to go!").succeed();
 
-        //this.loadAddons();
+        this.loadAddons();
     }
 
     /**
