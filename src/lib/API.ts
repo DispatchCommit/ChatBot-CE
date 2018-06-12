@@ -37,6 +37,11 @@ export class API {
         });
     }
 
+    /**
+     * Gets the current chat roster.
+     * 
+     * @returns {Promise}
+     */
     public roster(): Promise<any> {
         return this.makeRequest({
             method: "GET",
