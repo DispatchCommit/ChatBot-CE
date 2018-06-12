@@ -4,16 +4,30 @@ import * as WebSocket from "websocket";
 import * as Ora from "ora";
 import chalk from "chalk";
 import * as rp from "request-promise";
+import { fs } from "mz";
+import * as mkdirp from "mkdirp";
+import * as path from "path";
 import { API as BotAPI } from "./lib/API";
-import { Parser as BotParser } from "./lib/Parser"; 
+import { Parser as BotParser } from "./lib/Parser";
 
 
 // Variables
-const log = require('logger-alt').createLogger('./logs/latest.log')
 let websocketClient = new WebSocket.client();
 let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
 let botParser: BotParser;
+
+// Logger
+mkdirp(path.dirname("./logs/latest.log"), (error) => {
+    if(error) {
+        console.log(error);
+        process.exit();
+    }
+
+    fs.writeFile("./logs/latest.log", "");
+});
+
+const log = require('logger-alt').createLogger('./logs/latest.log')
 
 spinner.start();
 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
