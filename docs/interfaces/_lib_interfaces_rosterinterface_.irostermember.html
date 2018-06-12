@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IEraseMessage | Marked Bots - ChatBot CE</title>
+	<title>IRosterMember | Marked Bots - ChatBot CE</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_messageinterfaces_.html">&quot;lib/MessageInterfaces&quot;</a>
+					<a href="../modules/_lib_interfaces_rosterinterface_.html">&quot;lib/interfaces/RosterInterface&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_messageinterfaces_.ierasemessage.html">IEraseMessage</a>
+					<a href="_lib_interfaces_rosterinterface_.irostermember.html">IRosterMember</a>
 				</li>
 			</ul>
-			<h1>Interface IEraseMessage</h1>
+			<h1>Interface IRosterMember</h1>
 		</div>
 	</div>
 </header>
@@ -73,10 +73,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_lib_messageinterfaces_.imessage.html" class="tsd-signature-type">IMessage</a>
+						<a href="_lib_interfaces_userinterface_.iuser.html" class="tsd-signature-type">IUser</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">IEraseMessage</span>
+								<span class="target">IRosterMember</span>
 							</li>
 						</ul>
 					</li>
@@ -89,11 +89,15 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_messageinterfaces_.ierasemessage.html#messageids" class="tsd-kind-icon">message<wbr>Ids</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_messageinterfaces_.ierasemessage.html#removedby" class="tsd-kind-icon">removed<wbr>By</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_messageinterfaces_.ierasemessage.html#room" class="tsd-kind-icon">room</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_messageinterfaces_.ierasemessage.html#roomid" class="tsd-kind-icon">room<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_messageinterfaces_.ierasemessage.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_interfaces_rosterinterface_.irostermember.html#avatar" class="tsd-kind-icon">avatar</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_interfaces_rosterinterface_.irostermember.html#chatroomid" class="tsd-kind-icon">chatroom<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_interfaces_rosterinterface_.irostermember.html#previousrole" class="tsd-kind-icon">previous<wbr>Role</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_interfaces_rosterinterface_.irostermember.html#role" class="tsd-kind-icon">role</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_interfaces_rosterinterface_.irostermember.html#slug" class="tsd-kind-icon">slug</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_interfaces_rosterinterface_.irostermember.html#subscriber" class="tsd-kind-icon">subscriber</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_interfaces_rosterinterface_.irostermember.html#supporter" class="tsd-kind-icon">supporter</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_interfaces_rosterinterface_.irostermember.html#userid" class="tsd-kind-icon">user<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_lib_interfaces_rosterinterface_.irostermember.html#username" class="tsd-kind-icon">username</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,66 +106,96 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="messageids" class="tsd-anchor"></a>
-					<h3>message<wbr>Ids</h3>
-					<div class="tsd-signature tsd-kind-icon">message<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="avatar" class="tsd-anchor"></a>
+					<h3>avatar</h3>
+					<div class="tsd-signature tsd-kind-icon">avatar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/MessageInterfaces.ts#L17">lib/MessageInterfaces.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/RosterInterface.ts#L9">lib/interfaces/RosterInterface.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="chatroomid" class="tsd-anchor"></a>
+					<h3>chatroom<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">chatroom<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_lib_interfaces_userinterface_.iuser.html">IUser</a>.<a href="_lib_interfaces_userinterface_.iuser.html#chatroomid">chatroomId</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/UserInterface.ts#L5">lib/interfaces/UserInterface.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="removedby" class="tsd-anchor"></a>
-					<h3>removed<wbr>By</h3>
-					<div class="tsd-signature tsd-kind-icon">removed<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="previousrole" class="tsd-anchor"></a>
+					<h3>previous<wbr>Role</h3>
+					<div class="tsd-signature tsd-kind-icon">previous<wbr>Role<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/MessageInterfaces.ts#L18">lib/MessageInterfaces.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/RosterInterface.ts#L11">lib/interfaces/RosterInterface.ts:11</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>user<wbr>Id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>username<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-						</ul>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="room" class="tsd-anchor"></a>
-					<h3>room</h3>
-					<div class="tsd-signature tsd-kind-icon">room<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="role" class="tsd-anchor"></a>
+					<h3>role</h3>
+					<div class="tsd-signature tsd-kind-icon">role<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_messageinterfaces_.imessage.html">IMessage</a>.<a href="_lib_messageinterfaces_.imessage.html#room">room</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/MessageInterfaces.ts#L3">lib/MessageInterfaces.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/RosterInterface.ts#L10">lib/interfaces/RosterInterface.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="roomid" class="tsd-anchor"></a>
-					<h3>room<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">room<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="slug" class="tsd-anchor"></a>
+					<h3>slug</h3>
+					<div class="tsd-signature tsd-kind-icon">slug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_messageinterfaces_.imessage.html">IMessage</a>.<a href="_lib_messageinterfaces_.imessage.html#roomid">roomId</a></p>
+						<p>Inherited from <a href="_lib_interfaces_userinterface_.iuser.html">IUser</a>.<a href="_lib_interfaces_userinterface_.iuser.html#slug">slug</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/MessageInterfaces.ts#L4">lib/MessageInterfaces.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/UserInterface.ts#L3">lib/interfaces/UserInterface.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="subscriber" class="tsd-anchor"></a>
+					<h3>subscriber</h3>
+					<div class="tsd-signature tsd-kind-icon">subscriber<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/RosterInterface.ts#L12">lib/interfaces/RosterInterface.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="supporter" class="tsd-anchor"></a>
+					<h3>supporter</h3>
+					<div class="tsd-signature tsd-kind-icon">supporter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/RosterInterface.ts#L13">lib/interfaces/RosterInterface.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="userid" class="tsd-anchor"></a>
+					<h3>user<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="_lib_messageinterfaces_.imessage.html">IMessage</a>.<a href="_lib_messageinterfaces_.imessage.html#type">type</a></p>
+						<p>Inherited from <a href="_lib_interfaces_userinterface_.iuser.html">IUser</a>.<a href="_lib_interfaces_userinterface_.iuser.html#userid">userId</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/MessageInterfaces.ts#L2">lib/MessageInterfaces.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/UserInterface.ts#L4">lib/interfaces/UserInterface.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="username" class="tsd-anchor"></a>
+					<h3>username</h3>
+					<div class="tsd-signature tsd-kind-icon">username<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_lib_interfaces_userinterface_.iuser.html">IUser</a>.<a href="_lib_interfaces_userinterface_.iuser.html#username">username</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/interfaces/UserInterface.ts#L2">lib/interfaces/UserInterface.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,46 +216,61 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_helpers_.html">"lib/<wbr>Helpers"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_lib_messageinterfaces_.html">"lib/<wbr>Message<wbr>Interfaces"</a>
-					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_parser_.html">"lib/<wbr>Parser"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_interfaces_messageinterfaces_.html">"lib/interfaces/<wbr>Message<wbr>Interfaces"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_lib_interfaces_rosterinterface_.html">"lib/interfaces/<wbr>Roster<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_interfaces_userinterface_.html">"lib/interfaces/<wbr>User<wbr>Interface"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_messageinterfaces_.ichatmessage.html" class="tsd-kind-icon">IChat<wbr>Message</a>
+						<a href="_lib_interfaces_rosterinterface_.irosterlist.html" class="tsd-kind-icon">IRoster<wbr>List</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_messageinterfaces_.ierasemessage.html" class="tsd-kind-icon">IErase<wbr>Message</a>
+						<a href="_lib_interfaces_rosterinterface_.irostermember.html" class="tsd-kind-icon">IRoster<wbr>Member</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_messageinterfaces_.ierasemessage.html#messageids" class="tsd-kind-icon">message<wbr>Ids</a>
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#avatar" class="tsd-kind-icon">avatar</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#chatroomid" class="tsd-kind-icon">chatroom<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_messageinterfaces_.ierasemessage.html#removedby" class="tsd-kind-icon">removed<wbr>By</a>
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#previousrole" class="tsd-kind-icon">previous<wbr>Role</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#role" class="tsd-kind-icon">role</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_lib_messageinterfaces_.ierasemessage.html#room" class="tsd-kind-icon">room</a>
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#slug" class="tsd-kind-icon">slug</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#subscriber" class="tsd-kind-icon">subscriber</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#supporter" class="tsd-kind-icon">supporter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_lib_messageinterfaces_.ierasemessage.html#roomid" class="tsd-kind-icon">room<wbr>Id</a>
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#userid" class="tsd-kind-icon">user<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_lib_messageinterfaces_.ierasemessage.html#type" class="tsd-kind-icon">type</a>
+								<a href="_lib_interfaces_rosterinterface_.irostermember.html#username" class="tsd-kind-icon">username</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_messageinterfaces_.imessage.html" class="tsd-kind-icon">IMessage</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

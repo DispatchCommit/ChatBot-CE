@@ -100,7 +100,9 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_api_.api.html#erase" class="tsd-kind-icon">erase</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_lib_api_.api.html#makerequest" class="tsd-kind-icon">make<wbr>Request</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_api_.api.html#roster" class="tsd-kind-icon">roster</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_lib_api_.api.html#say" class="tsd-kind-icon">say</a></li>
 							</ul>
 						</section>
@@ -119,7 +121,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L6">lib/API.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L7">lib/API.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -163,7 +165,7 @@
 					<div class="tsd-signature tsd-kind-icon">bearer_<wbr>token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L15">lib/API.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L16">lib/API.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -178,7 +180,7 @@
 					<div class="tsd-signature tsd-kind-icon">headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L4">lib/API.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L5">lib/API.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -193,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">room<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L15">lib/API.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L16">lib/API.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,7 +210,7 @@
 					<div class="tsd-signature tsd-kind-icon">urlAPICommand<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;this.urlBase + &quot;/api-commands/v1/room/&quot; + this.roomId + &quot;/command/&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L6">lib/API.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L7">lib/API.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -218,13 +220,44 @@
 					<div class="tsd-signature tsd-kind-icon">url<wbr>Base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.stream.me&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L5">lib/API.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L6">lib/API.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="erase" class="tsd-anchor"></a>
+					<h3>erase</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">erase<span class="tsd-signature-symbol">(</span>messageIds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L47">lib/API.ts:47</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Erase a set of messaages from the chat.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>messageIds: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ids of the messages to erase from the chat.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="makerequest" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> make<wbr>Request</h3>
@@ -235,7 +268,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L45">lib/API.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L105">lib/API.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -257,6 +290,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="roster" class="tsd-anchor"></a>
+					<h3>roster</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">roster<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L64">lib/API.ts:64</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the current chat roster.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="say" class="tsd-anchor"></a>
 					<h3>say</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -266,7 +321,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/fb78daa/src/lib/API.ts#L28">lib/API.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/MarkedBots/ChatBot-CE/blob/52f7d23/src/lib/API.ts#L29">lib/API.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,10 +360,16 @@
 						<a href="../modules/_lib_helpers_.html">"lib/<wbr>Helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_messageinterfaces_.html">"lib/<wbr>Message<wbr>Interfaces"</a>
+						<a href="../modules/_lib_parser_.html">"lib/<wbr>Parser"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_parser_.html">"lib/<wbr>Parser"</a>
+						<a href="../modules/_lib_interfaces_messageinterfaces_.html">"lib/interfaces/<wbr>Message<wbr>Interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_interfaces_rosterinterface_.html">"lib/interfaces/<wbr>Roster<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_interfaces_userinterface_.html">"lib/interfaces/<wbr>User<wbr>Interface"</a>
 					</li>
 				</ul>
 			</nav>
@@ -337,8 +398,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_lib_api_.api.html#urlbase" class="tsd-kind-icon">url<wbr>Base</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_lib_api_.api.html#erase" class="tsd-kind-icon">erase</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_lib_api_.api.html#makerequest" class="tsd-kind-icon">make<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_lib_api_.api.html#roster" class="tsd-kind-icon">roster</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_lib_api_.api.html#say" class="tsd-kind-icon">say</a>
