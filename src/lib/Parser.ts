@@ -1,6 +1,6 @@
 import { Helper as BotHelper } from "./Helpers";
 import { API as BotAPI } from "./API";
-import { IMessage, IChatMessage } from "./MessageInterfaces";
+import { IMessage, IChatMessage } from "./interfaces/MessageInterfaces";
 import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
