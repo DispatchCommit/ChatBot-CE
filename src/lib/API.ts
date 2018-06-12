@@ -39,6 +39,24 @@ export class API {
     }
 
     /**
+     * Erase a set of messaages from the chat.
+     * 
+     * @param {string[]} messageIds The ids of the messages to erase from the chat.
+     * @return {Promise}
+     */
+    public erase(messageIds: number[]): Promise<any> {
+        return this.makeRequest({
+            method: "POST",
+            uri: this.urlAPICommand + "erase",
+            body: {
+                messageIds: messageIds,
+            },
+            headers: this.headers,
+            json: true,
+        });
+    }
+
+    /**
      * Gets the current chat roster.
      * 
      * @returns {Promise}
