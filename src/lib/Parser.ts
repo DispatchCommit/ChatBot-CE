@@ -10,6 +10,9 @@ export class Parser {
     public helper: BotHelper;
     public api: BotAPI;
     public commands: any;
+    public events: any = {
+        onChatMessage: [],
+    };
 
     /**
      * The constructor for the bot parser.
@@ -47,6 +50,10 @@ export class Parser {
                 username: <string> data.data[3][1],
                 userId: <string> data.data[3][7]
             }
+
+            this.events.onChatMessage.forEach((onChatMessage: any) => {
+                onChatMessage.execute(data, chatMessage);
+            });
 
             this.parse(chatMessage);
         }
@@ -97,6 +104,10 @@ export class Parser {
                             this.commands[addon.commands[commandIndex]] = addon[addon.commands[commandIndex]];
                         }
                     }
+                }
+
+                if("onChatMessage" in addon) {
+                    this.events.onChatMessage.push(addon["onChatMessage"]);
                 }
             } catch (error) {
                 new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
