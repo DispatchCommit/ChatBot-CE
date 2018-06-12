@@ -1,4 +1,5 @@
 import * as rp from "request-promise";
+import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
 
 export class API {
     private headers = {};
@@ -43,11 +44,38 @@ export class API {
      * @returns {Promise}
      */
     public roster(): Promise<any> {
-        return this.makeRequest({
-            method: "GET",
-            uri: this.urlBase + "/api-chat/v2/rooms/" + this.roomId + "/roster",
-            headers: this.headers,
-            json: true,
+        return new Promise((resolve, reject) => {
+            this.makeRequest({
+                method: "GET",
+                uri: this.urlBase + "/api-chat/v2/rooms/" + this.roomId + "/roster",
+                headers: this.headers,
+                json: true,
+            }).then(response => {
+                let roster = <IRosterList> {
+                    retrieved_at: Date.now(),
+                    members: [],
+                };
+    
+                response._embedded.roster.forEach((el: any) => {
+                    let member: IRosterMember = {
+                        userId: el.publicId,
+                        username: el.username,
+                        chatroomId: "user:" + el.publicId + ":web",
+                        slug: el.slug,
+                        role: el.role,
+                        previousRole: el.previousRole,
+                        subscriber: el.subscriber,
+                        supporter: el.supporter,
+                        avatar: el.avatar.href
+                    };
+
+                    roster.members.push(member);
+                });
+    
+                resolve(roster);
+            }).catch(error => {
+                reject(error);
+            });
         });
     }
 
