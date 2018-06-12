@@ -37,6 +37,15 @@ export class API {
         });
     }
 
+    public roster(): Promise<any> {
+        return this.makeRequest({
+            method: "GET",
+            uri: this.urlBase + "/api-chat/v2/rooms/" + this.roomId + "/roster",
+            headers: this.headers,
+            json: true,
+        });
+    }
+
     /**
      * A generic method to return a new Promise request.
      * 
