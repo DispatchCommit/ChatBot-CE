@@ -4,7 +4,8 @@ import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
 export class API {
     private headers = {};
     private urlBase = "https://www.stream.me";
-    private urlAPICommand = this.urlBase + "/api-commands/v1/room/" + this.roomId + "/command/"
+    private urlAPICommandBase = this.urlBase + "/api-commands/v1/"
+    private urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/"
     
     /**
      * A constructor for the bot API.
@@ -32,6 +33,18 @@ export class API {
             uri: this.urlAPICommand + "say",
             body: {
                 message: message,
+            },
+            headers: this.headers,
+            json: true,
+        });
+    }
+
+    public whisper(message: string, userId: string): Promise<any> {
+        return this.makeRequest({
+            method: "POSt",
+            uri: this.urlAPICommandBase + "command/whisper/user/" + userId,
+            body: {
+                message: message
             },
             headers: this.headers,
             json: true,
