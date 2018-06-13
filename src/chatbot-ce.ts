@@ -68,7 +68,12 @@ websocketClient.addListener("connect", (connection) => {
             console.log(chalk.red("Code: " + code));
             console.log(chalk.red("Description: " + description));
             log.info("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
-            process.exit(0);
+            //process.exit(0);
+        });
+
+        connection.addListener("error", event => {
+            console.log(event);
+            log.error(event);
         });
     
         connection.send('chat ' + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
