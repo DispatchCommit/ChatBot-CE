@@ -70,6 +70,10 @@ websocketClient.addListener("connect", (connection) => {
             log.info("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
             process.exit(0);
         });
+
+        setInterval(() => {
+            connection.send("ChatBot-CE Hearbeat");
+        }, 45000);
     
         connection.send('chat ' + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
     }).catch((error) => {
