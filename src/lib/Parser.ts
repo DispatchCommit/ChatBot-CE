@@ -65,7 +65,7 @@ export class Parser {
                 messageIds: data.messageIds,
                 removedBy: {
                     username: data.removedBy.slug,
-                    userId: data.removedBy.publicId
+                    userId: data.removedBy.publicID
                 },
             }
 
