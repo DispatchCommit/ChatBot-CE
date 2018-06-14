@@ -13,7 +13,7 @@ export interface IChatMessage extends IMessage {
     createdAt: number;
 }
 
-export interface IEraseMessage extends IMessage {
+export interface IErasedMessage extends IMessage {
     messageIds: number[];
     removedBy: {
         username: string;
