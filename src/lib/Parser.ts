@@ -1,6 +1,6 @@
 import { Helper as BotHelper } from "./Helpers";
 import { API as BotAPI } from "./API";
-import { IMessage, IChatMessage } from "./interfaces/MessageInterfaces";
+import { IMessage, IChatMessage, IErasedMessage } from "./interfaces/MessageInterfaces";
 import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
@@ -56,6 +56,17 @@ export class Parser {
             });
 
             this.parse(chatMessage);
+        } else if(data.type == "messageErased") {
+            let erasedMessage: IErasedMessage = {
+                type: <string> data.type,
+                room: <string> data.room,
+                roomId: <string> data.roomId,
+                messageIds: data.messageIds,
+                removedBy: {
+                    username: data.removedBy.slug,
+                    userId: data.removedBy.publicId
+                },
+            }
         }
     }
 
