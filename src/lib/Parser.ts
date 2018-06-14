@@ -12,6 +12,7 @@ export class Parser {
     public commands: any;
     public events: any = {
         onChatMessage: [],
+        onEraseMessage: [],
     };
 
     /**
@@ -67,6 +68,10 @@ export class Parser {
                     userId: data.removedBy.publicId
                 },
             }
+
+            this.events.onEraseMessage.forEach((onEraseMessage: any) => {
+                onEraseMessage.execute(data, erasedMessage);
+            });
         }
     }
 
@@ -119,6 +124,10 @@ export class Parser {
 
                 if("onChatMessage" in addon) {
                     this.events.onChatMessage.push(addon["onChatMessage"]);
+                }
+
+                if("onEraseMessage" in addon) {
+                    this.events.onEraseMessage.push(addon["onEraseMessage"]);
                 }
             } catch (error) {
                 new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
