@@ -78,6 +78,11 @@ websocketClient.addListener("connect", (connection) => {
         connection.send('chat ' + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
     }).catch((error) => {
         authorizeSpinner.fail("Failed to obtain access token from StreamMe");
+        
+        if(process.env.CHATBOT_DEBUG) {
+            console.log(error);
+        }
+
         log.error(error.message);
         process.exit(1);
     });
