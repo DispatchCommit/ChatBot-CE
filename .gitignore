@@ -1,6 +1,7 @@
 dist/
 addons/
 *.sqlite
+coinbot.json
 
 ### Code ###
 # Visual Studio Code - https://code.visualstudio.com/

@@ -6,6 +6,7 @@ export class API {
     private urlBase = "https://www.stream.me";
     private urlAPICommandBase = this.urlBase + "/api-commands/v1/"
     private urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/"
+    private queueSay: Array<any>
     
     /**
      * A constructor for the bot API.
@@ -41,7 +42,7 @@ export class API {
 
     public whisper(message: string, userId: string): Promise<any> {
         return this.makeRequest({
-            method: "POSt",
+            method: "POST",
             uri: this.urlAPICommandBase + "command/whisper/user/" + userId,
             body: {
                 message: message
