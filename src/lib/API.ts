@@ -1,12 +1,13 @@
 import * as rp from "request-promise";
 import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
+import { resolve } from "bluebird";
 
 export class API {
     private headers = {};
     private urlBase = "https://www.stream.me";
     private urlAPICommandBase = this.urlBase + "/api-commands/v1/"
     private urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/"
-    private queueSay: Array<any>
+    private queueSay: Array<any> = [];
     
     /**
      * A constructor for the bot API.
@@ -20,6 +21,13 @@ export class API {
             "Authorization" : "Bearer " + this.bearer_token,
             "Content-Type" : "application/json" 
         };
+
+        setInterval(() => {
+            if (this.queueSay.length > 0) {
+                let item = this.queueSay.shift();
+                this.makeRequest(item);
+            }
+        }, 600);
     }
 
     /**
@@ -29,14 +37,18 @@ export class API {
      * @returns {Promise}
      */
     public say(message: string): Promise<any> {
-        return this.makeRequest({
-            method: "POST",
-            uri: this.urlAPICommand + "say",
-            body: {
-                message: message,
-            },
-            headers: this.headers,
-            json: true,
+        return new Promise((resolve, reject) => {
+            this.queueSay.push({
+                method: "POST",
+                uri: this.urlAPICommand + "say",
+                body: {
+                    message: message,
+                },
+                headers: this.headers,
+                json: true,
+            });
+
+            resolve();
         });
     }
 
