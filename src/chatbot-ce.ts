@@ -16,6 +16,7 @@ let websocketClient = new WebSocket.client();
 let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
 let botParser: BotParser;
+let alreadyConnected: boolean = false;
 
 // Logger
 mkdirp(path.dirname("./logs/latest.log"), (error) => {
@@ -49,11 +50,15 @@ websocketClient.addListener("connect", (connection) => {
     }).then((response) => {
         authorizeSpinner.succeed("Bot authorized and access token has been obtained.");
 
-        botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
-        new Ora("Bot API initiated and ready to go!").succeed();
+        if (!alreadyConnected) {
+            botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
+            new Ora("Bot API initiated and ready to go!").succeed();
 
-        botParser = new BotParser(botAPI);
-        new Ora("Bot parser initiated and ready to go!").succeed();
+            botParser = new BotParser(botAPI);
+            new Ora("Bot parser initiated and ready to go!").succeed();
+
+            alreadyConnected = true;
+        }
 
         connection.addListener("message", (message) => {
             if(message.type.toLowerCase() == "utf8") {
@@ -67,13 +72,13 @@ websocketClient.addListener("connect", (connection) => {
             console.log(chalk.red("WebSocket connection closed."));
             console.log(chalk.red("Code: " + code));
             console.log(chalk.red("Description: " + description));
-            log.info("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
-            process.exit(0);
+            log.error("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
+            
+            setTimeout(() => {
+                console.log("Reconnecting to StreamMe.");
+                websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
+            }, 1250);
         });
-
-        setInterval(() => {
-            connection.send("ChatBot-CE Hearbeat");
-        }, 45000);
     
         connection.send('chat ' + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
     }).catch((error) => {
