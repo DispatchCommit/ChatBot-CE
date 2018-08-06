@@ -64,6 +64,12 @@ export class Helper {
      * @returns {string[]}
      */
     public getParams(input: string): string[] {
-        return input.split(" ").slice(1);
+        let params = input.split(" ").slice(1);
+
+        params = params.filter((element) => {
+            return (element.length > 0 && element !== undefined && element !== null);
+        });
+
+        return params;
     }
 }
