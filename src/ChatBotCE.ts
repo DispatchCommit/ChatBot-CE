@@ -60,7 +60,7 @@ websocketClient.addListener("connect", (connection) => {
         log.info("Bot authorized and access token has been obtained.");
 
         if (!alreadyConnected) {
-            botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web", log);
+            botAPI = new BotAPI(response.access_token, process.env.USER_ID, log);
             log.info("Bot API initiated and ready to go!");
 
             botParser = new BotParser(botAPI, log);
