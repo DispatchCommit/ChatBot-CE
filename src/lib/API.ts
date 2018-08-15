@@ -1,6 +1,5 @@
 import * as rp from "request-promise";
 import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
-import { resolve } from "bluebird";
 import * as Bunyan from "bunyan";
 
 export class API {
