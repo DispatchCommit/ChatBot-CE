@@ -1,8 +1,8 @@
 // Imports
 require("dotenv").config();
+let bunyanFormat = require("bunyan-format");
+
 import * as WebSocket from "websocket";
-import * as Ora from "ora";
-import chalk from "chalk";
 import * as rp from "request-promise";
 import { fs } from "mz";
 import * as mkdirp from "mkdirp";
@@ -11,37 +11,41 @@ import { API as BotAPI } from "./lib/API";
 import { Parser as BotParser } from "./lib/Parser";
 import * as Bunyan from "bunyan";
 
+
 // Variables
 let websocketClient = new WebSocket.client();
-let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
 let botParser: BotParser;
 let alreadyConnected: boolean = false;
-let log = Bunyan.createLogger({
-    name: "ChatBotCE",
-    streams: [{
-        path: path.dirname("./logs/chatbotce.log")
-    }]
-});
 
 // Logger
-// mkdirp(path.dirname("./logs/latest.log"), (error) => {
-//     if(error) {
-//         console.log(error);
-//         process.exit();
-//     }
+mkdirp(path.dirname("./logs/chatbotce.log"), (error) => {
+    if (error) {
+        console.log(error);
+        process.exit();
+    }
 
-//     fs.writeFile("./logs/latest.log", "");
-// });
+    fs.writeFile("./logs/chatbotce.log", "");
+});
 
-// const log = require('logger-alt').createLogger('./logs/latest.log')
+let bFormatOut = bunyanFormat({ outputMode: "short" });
+let log = Bunyan.createLogger({
+    name: "ChatBotCE",
+    streams: [
+        {
+            stream: bFormatOut
+        },
+        {
+            path: path.join("./logs/chatbotce.log"),
+            level: "trace"
+        }
+    ]
+});
 
-spinner.start();
 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
 
 websocketClient.addListener("connect", (connection) => {
-    spinner.succeed("Connected to StreamMe socket server.");
-    let authorizeSpinner = new Ora("Authorizing bot and obtaining access token.").start();
+    log.info("Connected to StreamMe websocket server.");
     rp({
         method: "POST",
         uri: "https://www.stream.me/api-auth/v1/login-bot",
@@ -54,14 +58,14 @@ websocketClient.addListener("connect", (connection) => {
         },
         json: true
     }).then((response) => {
-        authorizeSpinner.succeed("Bot authorized and access token has been obtained.");
+        log.info("Bot authorized and access token has been obtained.");
 
         if (!alreadyConnected) {
             botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web", log);
-            new Ora("Bot API initiated and ready to go!").succeed();
+            log.info("Bot API initiated and ready to go!");
 
             botParser = new BotParser(botAPI, log);
-            new Ora("Bot parser initiated and ready to go!").succeed();
+            log.info("Bot parser initiated and ready to go!");
 
             alreadyConnected = true;
         }
@@ -75,10 +79,7 @@ websocketClient.addListener("connect", (connection) => {
         });
     
         connection.addListener("close", (code, description) => {
-            console.log(chalk.red("WebSocket connection closed."));
-            console.log(chalk.red("Code: " + code));
-            console.log(chalk.red("Description: " + description));
-            log.error("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
+            log.warn("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
             
             setTimeout(() => {
                 console.log("Reconnecting to StreamMe.");
@@ -88,18 +89,13 @@ websocketClient.addListener("connect", (connection) => {
     
         connection.send("chat " + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
     }).catch((error) => {
-        authorizeSpinner.fail("Failed to obtain access token from StreamMe");
-        
-        if (process.env.CHATBOT_DEBUG) {
-            console.log(error);
-        }
-
-        log.error(error.message);
+        log.fatal("Failed to obtain access token from StreamMe");
+        log.fatal(error.message);
         process.exit(1);
     });
 });
 
 websocketClient.addListener("connectFailed", (error) => {
-    spinner.fail("Failed to connect to StreamMe socket server.");
-    log.error(error.message);
+    log.fatal("Failed to connect to StreamMe socket server.");
+    log.fatal(error.message);
 });

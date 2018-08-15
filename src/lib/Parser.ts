@@ -1,7 +1,6 @@
 import { Helper as BotHelper } from "./Helpers";
 import { API as BotAPI } from "./API";
 import { IMessage, IChatMessage, IErasedMessage } from "./interfaces/MessageInterfaces";
-import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
 import chalk from "chalk";
@@ -27,7 +26,7 @@ export class Parser {
         this.api = botAPI;
         this.commands = {};
 
-        new Ora("Bot helpers initiated and ready to go!").succeed();
+        this.log.info("Bot helpers initiated and ready to go!");
 
         this.loadAddons();
     }
@@ -98,7 +97,7 @@ export class Parser {
     }
 
     private loadAddons(): void {
-        let addonSpinner = new Ora("Loading bot addons.");
+        let addonSpinner = this.log.info("Loading bot addons.");
         let addonFolders = this.getFolders(process.env.ADDON_FOLDER);
         
         for (let index = 0; index < addonFolders.length; index++) {
@@ -113,7 +112,7 @@ export class Parser {
                 addon = require(module);
                 packageFile = JSON.parse(fs.readFileSync(path.resolve(module + "/package.json"), "utf8"));
 
-                new Ora("Successfully required addon '" + element + "'").succeed();
+                this.log.info("Successfully required addon '" + element + "'");
                 
                 if ("constructor" in addon) {
                     addon.constructor(this.api, this.helper, this.log.child({
@@ -137,12 +136,10 @@ export class Parser {
                     this.events.onEraseMessage.push(addon[onEraseMessage]);
                 }
             } catch (error) {
-                new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();
+                this.log.warn("Failed to load the addon '" + element + "'. Message '" + error.message + "'.");
                 continue;
             }
         }
-
-        addonSpinner.succeed("Addons loaded.");
     }
 
     private getFolders(folderPath: string) {
