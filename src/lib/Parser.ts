@@ -5,6 +5,7 @@ import * as Ora from "ora";
 import * as fs from "fs";
 import * as path from "path";
 import chalk from "chalk";
+import * as Bunyan from "bunyan";
 
 export class Parser {
     public helper: BotHelper;
@@ -21,7 +22,7 @@ export class Parser {
      * @constructor
      * @param {BotAPI} botAPI An instance of the bot API.
      */
-    constructor(botAPI: BotAPI) {
+    constructor(botAPI: BotAPI, public log: Bunyan) {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
         this.api = botAPI;
         this.commands = {};
@@ -103,15 +104,19 @@ export class Parser {
         for (let index = 0; index < addonFolders.length; index++) {
             const element = addonFolders[index];
             let addon;
+            let packageFile;
 
             try {
                 let module = path.resolve(process.env.ADDON_FOLDER + "/" + element)
                 addon = require(module);
+                packageFile = JSON.parse(fs.readFileSync(path.resolve(module + "/package.json"), "utf8"));
 
                 new Ora("Successfully required addon '" + element + "'").succeed();
                 
                 if("constructor" in addon) {
-                    addon.constructor(this.api, this.helper);
+                    addon.constructor(this.api, this.helper, this.log.child({
+                        widget_type: packageFile.name,
+                    }));
                 }
 
                 if("commands" in addon) {

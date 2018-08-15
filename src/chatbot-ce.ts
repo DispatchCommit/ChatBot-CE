@@ -9,7 +9,7 @@ import * as mkdirp from "mkdirp";
 import * as path from "path";
 import { API as BotAPI } from "./lib/API";
 import { Parser as BotParser } from "./lib/Parser";
-
+import * as Bunyan from "bunyan";
 
 // Variables
 let websocketClient = new WebSocket.client();
@@ -17,18 +17,24 @@ let spinner = new Ora("Connecting to StreamMe socket server.");
 let botAPI: BotAPI;
 let botParser: BotParser;
 let alreadyConnected: boolean = false;
-
-// Logger
-mkdirp(path.dirname("./logs/latest.log"), (error) => {
-    if(error) {
-        console.log(error);
-        process.exit();
-    }
-
-    fs.writeFile("./logs/latest.log", "");
+let log = Bunyan.createLogger({
+    name: "ChatBotCE",
+    streams: [{
+        path: path.dirname("./logs/chatbotce.log")
+    }]
 });
 
-const log = require('logger-alt').createLogger('./logs/latest.log')
+// Logger
+// mkdirp(path.dirname("./logs/latest.log"), (error) => {
+//     if(error) {
+//         console.log(error);
+//         process.exit();
+//     }
+
+//     fs.writeFile("./logs/latest.log", "");
+// });
+
+// const log = require('logger-alt').createLogger('./logs/latest.log')
 
 spinner.start();
 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
@@ -51,10 +57,10 @@ websocketClient.addListener("connect", (connection) => {
         authorizeSpinner.succeed("Bot authorized and access token has been obtained.");
 
         if (!alreadyConnected) {
-            botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web");
+            botAPI = new BotAPI(response.access_token, "user:" + process.env.USER_ID + ":web", log);
             new Ora("Bot API initiated and ready to go!").succeed();
 
-            botParser = new BotParser(botAPI);
+            botParser = new BotParser(botAPI, log);
             new Ora("Bot parser initiated and ready to go!").succeed();
 
             alreadyConnected = true;

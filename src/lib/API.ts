@@ -1,6 +1,7 @@
 import * as rp from "request-promise";
 import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
 import { resolve } from "bluebird";
+import * as Bunyan from "bunyan";
 
 export class API {
     private headers = {};
@@ -16,7 +17,7 @@ export class API {
      * @param {string} bearer_token The access beaerer token gotten from bot authorization route from StreamMe.
      * @param {string} roomId The user's room id to send data too.
      */
-    constructor(private bearer_token: string, public roomId: string) {
+    constructor(private bearer_token: string, public roomId: string, public log: Bunyan) {
         this.headers = {
             "Authorization" : "Bearer " + this.bearer_token,
             "Content-Type" : "application/json" 
