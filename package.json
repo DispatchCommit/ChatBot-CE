@@ -3,15 +3,15 @@
   "version": "1.0.0-beta",
   "description": "A community chat bot for StreamMe",
   "private": true,
-  "main": "dist/chatbot-ce",
-  "typings": "dist/chatbot-ce",
+  "main": "dist/ChatBotCE",
+  "typings": "dist/ChatBotCE",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run compile && npm run start",
     "clean": "rm -rf ./dist/*",
     "compile": "npm run grunt && tsc -p .",
     "grunt": "grunt",
-    "start": "node ./dist/chatbot-ce.js",
+    "start": "node ./dist/ChatBotCE.js",
     "generate-docs": "node_modules/.bin/typedoc --out ./docs/ --hideGenerator --target \"es5\" --module \"commonjs\" --name \"Marked Bots - ChatBot CE\""
   },
   "repository": {

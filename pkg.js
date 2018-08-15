@@ -5,5 +5,5 @@ if(!fs.existsSync('./dist/release')) {
     fs.mkdirSync('./dist/release');
 }
 
-exec([ 'dist/chatbot-ce.js', '--out-path', 'dist/release' ]);
+exec([ 'dist/ChatBotCE.js', '--out-path', 'dist/release' ]);
 
