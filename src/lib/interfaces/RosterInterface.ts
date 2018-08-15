@@ -1,4 +1,4 @@
-import { IUser } from "./UserInterface"
+import { IUser } from "./UserInterface";
 
 export interface IRosterList {
     members: Array<IRosterMember>;

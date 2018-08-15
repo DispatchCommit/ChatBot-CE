@@ -41,7 +41,7 @@ export class Parser {
     public parseUTF8(data: any): void {
         data = JSON.parse(data);
         
-        if(data.type == "chat") {
+        if (data.type === "chat") {
             let chatMessage: IChatMessage = {
                 type: <string> data.type,
                 room: <string> data.room,
@@ -51,14 +51,14 @@ export class Parser {
                 createdAt: <number> data.data[8],
                 username: <string> data.data[3][1],
                 userId: <string> data.data[3][7]
-            }
+            };
 
             this.events.onChatMessage.forEach((onChatMessage: any) => {
                 onChatMessage.execute(data, chatMessage);
             });
 
             this.parse(chatMessage);
-        } else if(data.type == "messageErased") {
+        } else if (data.type === "messageErased") {
             let erasedMessage: IErasedMessage = {
                 type: <string> data.type,
                 room: <string> data.room,
@@ -68,7 +68,7 @@ export class Parser {
                     username: data.removedBy.slug,
                     userId: data.removedBy.publicID
                 },
-            }
+            };
 
             this.events.onEraseMessage.forEach((onEraseMessage: any) => {
                 onEraseMessage.execute(data, erasedMessage);
@@ -82,16 +82,16 @@ export class Parser {
      * 
      * @param {IMessage} message The message to parse.
      */
-    public parse(IMessage: IMessage): void {
-        if(IMessage.type === "chat") {
-            let message: IChatMessage = <IChatMessage> IMessage;
+    public parse(message: IMessage): void {
+        if (message.type === "chat") {
+            let msg: IChatMessage = <IChatMessage> message;
 
-            if(this.helper.isCommand(message.message)) {
-                let command = this.helper.getCommand(message.message).toLowerCase();
-                let parameters = this.helper.hasParams(message.message) ? this.helper.getParams(message.message) : null;
+            if (this.helper.isCommand(msg.message)) {
+                let command = this.helper.getCommand(msg.message).toLowerCase();
+                let parameters = this.helper.hasParams(msg.message) ? this.helper.getParams(msg.message) : null;
                 
-                if(this.commands[command]) {
-                    this.commands[command].execute(command, parameters, message);
+                if (this.commands[command]) {
+                    this.commands[command].execute(command, parameters, msg);
                 }
             }
         }
@@ -105,34 +105,36 @@ export class Parser {
             const element = addonFolders[index];
             let addon;
             let packageFile;
+            let onChatMessage = "onChatMessage";
+            let onEraseMessage = "onEraseMessage";
 
             try {
-                let module = path.resolve(process.env.ADDON_FOLDER + "/" + element)
+                let module = path.resolve(process.env.ADDON_FOLDER + "/" + element);
                 addon = require(module);
                 packageFile = JSON.parse(fs.readFileSync(path.resolve(module + "/package.json"), "utf8"));
 
                 new Ora("Successfully required addon '" + element + "'").succeed();
                 
-                if("constructor" in addon) {
+                if ("constructor" in addon) {
                     addon.constructor(this.api, this.helper, this.log.child({
                         widget_type: packageFile.name,
                     }));
                 }
 
-                if("commands" in addon) {
-                    for(let commandIndex = 0; commandIndex < addon.commands.length; commandIndex++) {
-                        if(addon.commands[commandIndex] in addon) {
+                if ("commands" in addon) {
+                    for (let commandIndex = 0; commandIndex < addon.commands.length; commandIndex++) {
+                        if (addon.commands[commandIndex] in addon) {
                             this.commands[addon.commands[commandIndex]] = addon[addon.commands[commandIndex]];
                         }
                     }
                 }
 
-                if("onChatMessage" in addon) {
-                    this.events.onChatMessage.push(addon["onChatMessage"]);
+                if (onChatMessage in addon) {
+                    this.events.onChatMessage.push(addon[onChatMessage]);
                 }
 
-                if("onEraseMessage" in addon) {
-                    this.events.onEraseMessage.push(addon["onEraseMessage"]);
+                if (onEraseMessage in addon) {
+                    this.events.onEraseMessage.push(addon[onEraseMessage]);
                 }
             } catch (error) {
                 new Ora("Failed to load the addon '" + element + "'. Message '" + error.message + "'.").fail();

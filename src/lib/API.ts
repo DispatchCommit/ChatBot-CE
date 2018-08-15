@@ -6,20 +6,20 @@ import * as Bunyan from "bunyan";
 export class API {
     private headers = {};
     private urlBase = "https://www.stream.me";
-    private urlAPICommandBase = this.urlBase + "/api-commands/v1/"
-    private urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/"
+    private urlAPICommandBase = this.urlBase + "/api-commands/v1/";
+    private urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/";
     private queueSay: Array<any> = [];
     
     /**
      * A constructor for the bot API.
      * 
      * @constructor
-     * @param {string} bearer_token The access beaerer token gotten from bot authorization route from StreamMe.
+     * @param {string} bearerToken The access beaerer token gotten from bot authorization route from StreamMe.
      * @param {string} roomId The user's room id to send data too.
      */
-    constructor(private bearer_token: string, public roomId: string, public log: Bunyan) {
+    constructor(private bearerToken: string, public roomId: string, public log: Bunyan) {
         this.headers = {
-            "Authorization" : "Bearer " + this.bearer_token,
+            "Authorization" : "Bearer " + this.bearerToken,
             "Content-Type" : "application/json" 
         };
 

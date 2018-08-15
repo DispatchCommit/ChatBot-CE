@@ -67,8 +67,8 @@ websocketClient.addListener("connect", (connection) => {
         }
 
         connection.addListener("message", (message) => {
-            if(message.type.toLowerCase() == "utf8") {
-                if(message.utf8Data.startsWith("chat message")) {
+            if (message.type.toLowerCase() === "utf8") {
+                if (message.utf8Data.startsWith("chat message")) {
                     botParser.parseUTF8(message.utf8Data.split("chat message ")[1]);
                 }
             }
@@ -86,11 +86,11 @@ websocketClient.addListener("connect", (connection) => {
             }, 1250);
         });
     
-        connection.send('chat ' + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
+        connection.send("chat " + JSON.stringify({ action: "join", room: "user:" + process.env.USER_ID + ":web" }));
     }).catch((error) => {
         authorizeSpinner.fail("Failed to obtain access token from StreamMe");
         
-        if(process.env.CHATBOT_DEBUG) {
+        if (process.env.CHATBOT_DEBUG) {
             console.log(error);
         }
 

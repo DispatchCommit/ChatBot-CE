@@ -54,7 +54,7 @@ export class Helper {
      * @returns {number}
      */
     public numParams(input: string): number {
-        return input.split(" ").length-1;
+        return input.split(" ").length - 1;
     }
 
     /**
