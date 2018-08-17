@@ -9,7 +9,7 @@ export class API {
     private roomId: string;
     private urlBase = "https://www.stream.me";
     private urlAPICommandBase = this.urlBase + "/api-commands/v1/";
-    private urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/";
+    private urlAPICommand: string;
     private queueSay: Array<any> = [];
     private multistreamsArray: Array<IMultistream> = [];
     
@@ -26,7 +26,8 @@ export class API {
             "Content-Type" : "application/json" 
         };
 
-        this.roomId = `user:${userId}:web`;
+        this.roomId = `user:${this.userId}:web`;
+        this.urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/";
 
         this.makeRequest({
             method: "GET",
@@ -57,7 +58,9 @@ export class API {
         setInterval(() => {
             if (this.queueSay.length > 0) {
                 let item = this.queueSay.shift();
-                this.makeRequest(item);
+                this.makeRequest(item).catch(error => {
+                    this.log.error(error);
+                });
             }
         }, 600);
     }
