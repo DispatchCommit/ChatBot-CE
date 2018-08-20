@@ -3,13 +3,15 @@ import { API as BotAPI } from "./API";
 import { IMessage, IChatMessage, IErasedMessage } from "./interfaces/MessageInterfaces";
 import * as fs from "fs";
 import * as path from "path";
-import chalk from "chalk";
 import * as Bunyan from "bunyan";
+
+let pubSub = require("PubSub");
 
 export class Parser {
     public helper: BotHelper;
     public api: BotAPI;
     public commands: any;
+    public pubsub: any;
     public events: any = {
         onChatMessage: [],
         onEraseMessage: [],
@@ -25,6 +27,7 @@ export class Parser {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
         this.api = botAPI;
         this.commands = {};
+        this.pubsub = new pubSub();
 
         this.log.info("Bot helpers initiated and ready to go!");
 
@@ -117,7 +120,7 @@ export class Parser {
                 if ("constructor" in addon) {
                     addon.constructor(this.api, this.helper, this.log.child({
                         widget_type: packageFile.name,
-                    }));
+                    }), this.pubsub);
                 }
 
                 if ("commands" in addon) {
