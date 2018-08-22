@@ -12,7 +12,7 @@ export class PubSub {
             remove: () => {
                 delete this.topics[topic][index];
             }
-        }
+        };
     }
 
     public publish(topic: string, data: Object) {
