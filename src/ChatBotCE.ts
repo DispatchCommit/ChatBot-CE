@@ -1,6 +1,4 @@
 require("dotenv").config();
-let bunyanFormat = require("bunyan-format");
-
 import * as WebSocket from "websocket";
 import * as rp from "request-promise";
 import * as mkdirp from "mkdirp";
@@ -8,15 +6,13 @@ import * as path from "path";
 import { API as BotAPI } from "./lib/API";
 import { Parser as BotParser } from "./lib/Parser";
 import * as Bunyan from "bunyan";
-
-
-// Variables
+let bunyanFormat = require("bunyan-format");
+let bFormatOut = bunyanFormat({ outputMode: "short" });
 let websocketClient = new WebSocket.client();
 let botAPI: BotAPI;
 let botParser: BotParser;
 let alreadyConnected: boolean = false;
 
-// Logger
 mkdirp(path.dirname("./logs/ChatBotCE.log"), (error) => {
     if (error) {
         console.log(error);
@@ -24,7 +20,6 @@ mkdirp(path.dirname("./logs/ChatBotCE.log"), (error) => {
     }
 });
 
-let bFormatOut = bunyanFormat({ outputMode: "short" });
 let log = Bunyan.createLogger({
     name: "ChatBotCE",
     streams: [
@@ -79,7 +74,7 @@ websocketClient.addListener("connect", (connection) => {
             log.warn("WebSocket connection closed with code " + code + ". Description \"" + description + "\"");
             
             setTimeout(() => {
-                console.log("Reconnecting to StreamMe.");
+                log.info("Reconnecting to StreamMe.");
                 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
             }, 1250);
         });
@@ -95,4 +90,9 @@ websocketClient.addListener("connect", (connection) => {
 websocketClient.addListener("connectFailed", (error) => {
     log.fatal("Failed to connect to StreamMe socket server.");
     log.fatal(error.message);
+    
+    setTimeout(() => {
+        log.info("Reconnecting to StreamMe.");
+        websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
+    }, 1250);
 });
