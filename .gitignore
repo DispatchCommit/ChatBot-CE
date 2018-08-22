@@ -3,6 +3,7 @@ addons/
 typings/
 *.sqlite
 coinbot.json
+raid.json
 
 ### Code ###
 # Visual Studio Code - https://code.visualstudio.com/

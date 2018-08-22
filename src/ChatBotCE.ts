@@ -1,4 +1,3 @@
-// Imports
 require("dotenv").config();
 let bunyanFormat = require("bunyan-format");
 
