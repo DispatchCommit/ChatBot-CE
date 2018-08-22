@@ -1,11 +1,10 @@
 import { Helper as BotHelper } from "./Helpers";
 import { API as BotAPI } from "./API";
 import { IMessage, IChatMessage, IErasedMessage } from "./interfaces/MessageInterfaces";
+import { PubSub } from "./PubSub";
 import * as fs from "fs";
 import * as path from "path";
 import * as Bunyan from "bunyan";
-
-let pubSub = require("PubSub");
 
 export class Parser {
     public helper: BotHelper;
@@ -27,7 +26,7 @@ export class Parser {
         this.helper = new BotHelper(process.env.COMMAND_PREFIX);
         this.api = botAPI;
         this.commands = {};
-        this.pubsub = new pubSub();
+        this.pubsub = new PubSub();
 
         this.log.info("Bot helpers initiated and ready to go!");
 
