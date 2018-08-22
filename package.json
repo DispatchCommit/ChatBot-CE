@@ -1,10 +1,10 @@
 {
-  "name": "chatbot-ce",
-  "version": "1.0.0-beta",
+  "name": "chatbotce",
+  "version": "1.0.0-beta.3",
   "description": "A community chat bot for StreamMe",
-  "private": true,
-  "main": "dist/ChatBotCE",
-  "typings": "dist/ChatBotCE",
+  "private": false,
+  "main": "typings/ChatBotCE",
+  "typings": "typings/ChatBotCE",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run compile && npm run start",
@@ -12,12 +12,16 @@
     "compile": "npm run grunt && tsc -p .",
     "grunt": "grunt",
     "start": "node ./dist/ChatBotCE.js",
-    "generate-docs": "node_modules/.bin/typedoc --out ./docs/ --hideGenerator --target \"es5\" --module \"commonjs\" --name \"Marked Bots - ChatBot CE\""
+    "generate-docs": "node_modules/.bin/typedoc --out ./docs/ --hideGenerator --target \"es5\" --module \"commonjs\" --name \"Marked Bots - ChatBot CE\"",
+    "prepublish": "tsc -p . -d --declarationDir ./typings"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MarkedBots/ChatBot-CE.git"
   },
+  "files": [
+    "typings/"
+  ],
   "author": "Marked Bots",
   "license": "AGPL-3.0",
   "bugs": {

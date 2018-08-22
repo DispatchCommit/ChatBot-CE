@@ -1,5 +1,6 @@
 dist/
 addons/
+typings/
 *.sqlite
 coinbot.json
 
