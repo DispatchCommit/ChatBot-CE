@@ -34,7 +34,6 @@
     "dotenv": "^5.0.1",
     "logger-alt": "0.0.1",
     "mkdirp": "^0.5.1",
-    "mz": "^2.7.0",
     "pify": "^3.0.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",

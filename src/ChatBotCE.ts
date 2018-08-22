@@ -3,7 +3,6 @@ let bunyanFormat = require("bunyan-format");
 
 import * as WebSocket from "websocket";
 import * as rp from "request-promise";
-import { fs } from "mz";
 import * as mkdirp from "mkdirp";
 import * as path from "path";
 import { API as BotAPI } from "./lib/API";

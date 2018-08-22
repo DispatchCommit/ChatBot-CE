@@ -1,5 +1,4 @@
 import * as rp from "request-promise";
-import * as request from "request";
 import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
 import * as Bunyan from "bunyan";
 import { IMultistream } from "./interfaces/MultistreamInterface";
