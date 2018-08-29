@@ -7,7 +7,7 @@
         "outDir": "./dist/",
         "preserveConstEnums": true,
         "noImplicitAny": true,
-        "sourceMap": true
+        "sourceMap": false
     },
     "include": [
         "src/**/*"
