@@ -1,3 +1,6 @@
+import * as fs from "fs";
+import * as path from "path";
+
 export class Helper {
     /**
      * The Helper constructor.
@@ -71,5 +74,16 @@ export class Helper {
         });
 
         return params;
+    }
+
+    /**
+     * Get all the folders in a directory.
+     * 
+     * @param folderPath The path to read folders from.
+     */
+    public getFolders(folderPath: string) {
+        return fs.readdirSync(folderPath).filter((file) => {
+            return fs.statSync(path.join(folderPath, file)).isDirectory();
+        });
     }
 }

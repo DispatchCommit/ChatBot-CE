@@ -100,7 +100,7 @@ export class Parser {
 
     private loadAddons(): void {
         let addonSpinner = this.log.info("Loading bot addons.");
-        let addonFolders = this.getFolders(process.env.ADDON_FOLDER);
+        let addonFolders = this.helper.getFolders(process.env.ADDON_FOLDER);
         
         for (let index = 0; index < addonFolders.length; index++) {
             const element = addonFolders[index];
@@ -142,11 +142,5 @@ export class Parser {
                 continue;
             }
         }
-    }
-
-    private getFolders(folderPath: string) {
-        return fs.readdirSync(folderPath).filter((file) => {
-            return fs.statSync(path.join(folderPath, file)).isDirectory();
-        });
     }
 }
