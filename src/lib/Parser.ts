@@ -10,7 +10,7 @@ export class Parser {
     public helper: BotHelper;
     public api: BotAPI;
     public commands: any;
-    public pubsub: any;
+    public pubsub: PubSub;
     public events: any = {
         onChatMessage: [],
         onEraseMessage: [],
