@@ -6,8 +6,8 @@ import { IMultistream } from "./interfaces/MultistreamInterface";
 export class API {
     private headers = {};
     private roomId: string;
-    private urlBase = "https://www.stream.me";
-    private urlAPICommandBase = this.urlBase + "/api-commands/v1/";
+    private urlBase = `https://www.stream.me`;
+    private urlAPICommandBase = `${this.urlBase }/api-commands/v1`;
     private urlAPICommand: string;
     private queueSay: Array<any> = [];
     private multistreamsArray: Array<IMultistream> = [];
@@ -21,15 +21,15 @@ export class API {
      */
     constructor(private bearerToken: string, private userId: string, public log: Bunyan) {
         this.headers = {
-            "Authorization" : "Bearer " + this.bearerToken,
-            "Content-Type" : "application/json" 
+            "Authorization": `Bearer ${this.bearerToken}`,
+            "Content-Type": `application/json`
         };
 
         this.roomId = `user:${this.userId}:web`;
-        this.urlAPICommand = this.urlAPICommandBase + "room/" + this.roomId + "/command/";
+        this.urlAPICommand = `${this.urlAPICommandBase}/room/${this.roomId}/command`;
 
         this.makeRequest({
-            method: "GET",
+            method: `GET`,
             uri: `${this.urlBase}/api-multistream/v1/users/${this.userId}`,
             headers: this.headers,
             json: true,
@@ -73,8 +73,8 @@ export class API {
     public say(message: string): Promise<any> {
         return new Promise((resolve, reject) => {
             this.queueSay.push({
-                method: "POST",
-                uri: this.urlAPICommand + "say",
+                method: `POST`,
+                uri: `${this.urlAPICommand}/say`,
                 body: {
                     message: message,
                 },
@@ -95,8 +95,8 @@ export class API {
      */
     public whisper(message: string, userId: string): Promise<any> {
         return this.makeRequest({
-            method: "POST",
-            uri: this.urlAPICommandBase + "command/whisper/user/" + userId,
+            method: `POST`,
+            uri: `${this.urlAPICommand}/command/whisper/user/${userId}`,
             body: {
                 message: message
             },
@@ -113,8 +113,8 @@ export class API {
      */
     public mod(userId: string): Promise<any> {
         return this.makeRequest({
-            method: "PUT",
-            uri: this.urlAPICommand + "mod/user/" + userId,
+            method: `PUT`,
+            uri: `${this.urlAPICommand}/mod/user/${userId}`,
             headers: this.headers,
             json: true
         });
@@ -128,8 +128,8 @@ export class API {
      */
     public unmod(userId: string): Promise<any> {
         return this.makeRequest({
-            method: "PUT",
-            uri: this.urlAPICommand + "unmod/user/" + userId,
+            method: `PUT`,
+            uri: `${this.urlAPICommand}/unmod/user/${userId}`,
             headers: this.headers,
             json: true
         });
@@ -144,8 +144,8 @@ export class API {
      */
     public erase(messageIds: number[]): Promise<any> {
         return this.makeRequest({
-            method: "POST",
-            uri: this.urlAPICommand + "erase",
+            method: `POST`,
+            uri: `${this.urlAPICommand}/erase`,
             body: {
                 messageIds: messageIds,
             },
@@ -163,8 +163,8 @@ export class API {
     public roster(chatroomId?: string): Promise<any> {
         return new Promise((resolve, reject) => {
             this.makeRequest({
-                method: "GET",
-                uri: this.urlBase + "/api-chat/v2/rooms/" + (chatroomId ? chatroomId : this.roomId) + "/roster",
+                method: `GET`,
+                uri: `${this.urlBase}/api-chat/v2/rooms/${(chatroomId ? chatroomId : this.roomId)}/roster`,
                 headers: this.headers,
                 json: true,
             }).then(response => {
@@ -177,7 +177,7 @@ export class API {
                     let member: IRosterMember = {
                         userId: el.publicId,
                         username: el.username,
-                        chatroomId: "user:" + el.publicId + ":web",
+                        chatroomId: `user:` + el.publicId + `:web`,
                         slug: el.slug,
                         role: el.role,
                         previousRole: el.previousRole,
