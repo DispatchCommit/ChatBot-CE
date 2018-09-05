@@ -1,4 +1,3 @@
-require("dotenv").config();
 import * as WebSocket from "websocket";
 import * as rp from "request-promise";
 import * as mkdirp from "mkdirp";
@@ -6,12 +5,21 @@ import * as path from "path";
 import { API as BotAPI } from "./lib/API";
 import { Parser as BotParser } from "./lib/Parser";
 import * as Bunyan from "bunyan";
+let fs = require("fs");
 let bunyanFormat = require("bunyan-format");
 let bFormatOut = bunyanFormat({ outputMode: "short" });
 let websocketClient = new WebSocket.client();
 let botAPI: BotAPI;
 let botParser: BotParser;
 let alreadyConnected: boolean = false;
+
+if (!fs.existsSync("./.env")) {
+    let envStubData = fs.readFileSync(path.join("./stubs/env.stub"));
+
+    fs.writeFileSync("./.env", envStubData);
+}
+
+require("dotenv").config();
 
 mkdirp(path.dirname("./logs/ChatBotCE.log"), (error) => {
     if (error) {
@@ -33,6 +41,15 @@ let log = Bunyan.createLogger({
         }
     ]
 });
+
+mkdirp(process.env.ADDON_FOLDER, (error) => {
+    if (error) {
+        log.error(error);
+
+        process.exit();
+    }
+});
+
 
 websocketClient.connect("wss://www.stream.me/api-rooms/v3/ws");
 

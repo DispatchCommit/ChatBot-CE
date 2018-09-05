@@ -63,5 +63,10 @@
     "typedoc": "^0.11.1",
     "typescript": "^2.9.2",
     "yargs": "^11.0.0"
+  },
+  "pkg": {
+    "assets": [
+      "stubs/**/*"
+    ]
   }
 }
