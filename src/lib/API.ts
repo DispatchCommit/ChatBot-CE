@@ -199,10 +199,9 @@ export class API {
     /**
      * Get all the multistreams the user is a part of.
      * 
-     * @param removeEnded 
      * @returns {Array<IMultistream>}
      */
-    public multistreams(removeEnded: boolean = true): Array<IMultistream> {
+    public multistreams(): Array<IMultistream> {
         return this.multistreamsArray;
     }
 
