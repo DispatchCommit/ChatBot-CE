@@ -105,6 +105,37 @@ export class API {
         });
     }
 
+     /**
+     * Mod a user in the chat.
+     * 
+     * @param {string} userId The user id to mod.
+     * @return {Promise}
+     */
+    public mod(userId: string): Promise<any> {
+        return this.makeRequest({
+            method: "PUT",
+            uri: this.urlAPICommand + "mod/user/" + userId,
+            headers: this.headers,
+            json: true
+        });
+    }
+
+    /**
+     * Unmod a user in the chat.
+     * 
+     * @param {string} userId The user id to unmod.
+     * @return {Promise}
+     */
+    public unmod(userId: string): Promise<any> {
+        return this.makeRequest({
+            method: "PUT",
+            uri: this.urlAPICommand + "unmod/user/" + userId,
+            headers: this.headers,
+            json: true
+        });
+    }
+
+
     /**
      * Erase a set of messaages from the chat.
      * 
