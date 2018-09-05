@@ -2,6 +2,7 @@ import * as rp from "request-promise";
 import { IRosterList, IRosterMember } from "./interfaces/RosterInterface";
 import * as Bunyan from "bunyan";
 import { IMultistream } from "./interfaces/MultistreamInterface";
+import { Queue } from "./Queue";
 
 export class API {
     private headers = {};
@@ -9,7 +10,7 @@ export class API {
     private urlBase = `https://www.stream.me`;
     private urlAPICommandBase = `${this.urlBase }/api-commands/v1`;
     private urlAPICommand: string;
-    private queueSay: Array<any> = [];
+    private queueSay: Queue;
     private multistreamsArray: Array<IMultistream> = [];
     
     /**
@@ -24,6 +25,8 @@ export class API {
             "Authorization": `Bearer ${this.bearerToken}`,
             "Content-Type": `application/json`
         };
+
+        this.queueSay = new Queue();
 
         this.roomId = `user:${this.userId}:web`;
         this.urlAPICommand = `${this.urlAPICommandBase}/room/${this.roomId}/command`;
@@ -55,8 +58,8 @@ export class API {
         });
 
         setInterval(() => {
-            if (this.queueSay.length > 0) {
-                let item = this.queueSay.shift();
+            if (!this.queueSay.isEmpty()) {
+                let item = this.queueSay.dequeue();
                 this.makeRequest(item).catch(error => {
                     this.log.error(error);
                 });
@@ -72,7 +75,7 @@ export class API {
      */
     public say(message: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.queueSay.push({
+            this.queueSay.enqueue({
                 method: `POST`,
                 uri: `${this.urlAPICommand}/say`,
                 body: {
