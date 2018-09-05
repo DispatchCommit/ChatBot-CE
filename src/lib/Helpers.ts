@@ -86,4 +86,15 @@ export class Helper {
             return fs.statSync(path.join(folderPath, file)).isDirectory();
         });
     }
+
+
+    /**
+     * Convert a number to a number with comma at the thousands.
+     * 
+     * @param {number} value 
+     * @returns {string}
+     */
+    public withCommas(value: number): string {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 }
