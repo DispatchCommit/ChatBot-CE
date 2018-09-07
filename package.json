@@ -1,6 +1,6 @@
 {
   "name": "chatbotce",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "A community chat bot for StreamMe",
   "private": false,
   "main": "typings/ChatBotCE",
