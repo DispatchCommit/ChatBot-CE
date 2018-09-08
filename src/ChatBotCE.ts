@@ -28,6 +28,10 @@ mkdirp(path.dirname("./logs/ChatBotCE.log"), (error) => {
     }
 });
 
+if (!fs.existsSync("./i18n")) {
+    fs.mkdirSync("./i18n");
+}
+
 let log = Bunyan.createLogger({
     name: "ChatBotCE",
     streams: [
