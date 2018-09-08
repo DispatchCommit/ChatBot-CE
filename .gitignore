@@ -1,6 +1,7 @@
 dist/
 addons/
 typings/
+i18n/
 *.sqlite
 coinbot.json
 raid.json
