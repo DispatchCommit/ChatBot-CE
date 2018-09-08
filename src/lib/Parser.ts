@@ -5,6 +5,7 @@ import { PubSub } from "./PubSub";
 import * as fs from "fs";
 import * as path from "path";
 import * as Bunyan from "bunyan";
+import { I18n } from "./I18n";
 
 export class Parser {
     public helper: BotHelper;
@@ -119,7 +120,7 @@ export class Parser {
                 if ("constructor" in addon) {
                     addon.constructor(this.api, this.helper, this.log.child({
                         widget_type: packageFile.name,
-                    }), this.pubsub);
+                    }), this.pubsub, new I18n(packageFile.name));
                 }
 
                 if ("commands" in addon) {
