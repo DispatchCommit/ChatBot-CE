@@ -2,7 +2,7 @@ let fs = require("fs");
 let path = require("path");
 
 export class I18n {
-    private i18nJson: { [index: string] : string} = null;
+    private i18nJson: { [index: string] : any } = null;
 
     constructor(addonName: string) {
         if (fs.existsSync(path.join(`./i18n/${addonName}/${process.env.I18N_LANGUAGE}.json`))) {
@@ -15,12 +15,29 @@ export class I18n {
     }
 
     public get(identifier: string, defaultString: string = null, replacements: Object = null): string {
-        if (this.i18nJson !== null && this.i18nJson.hasOwnProperty(identifier)) {
-            defaultString = this.i18nJson[identifier];
-        }
+        if (this.i18nJson != null) {
+            let orginalDefaultString: string = defaultString;
+            let identifiers = identifier.split(".");
+            let lastIndex = identifiers.length - 1;
+            let newJson: { [index: string] : any } = null;
 
-        if (replacements !== null) {
-            defaultString = this.replace(defaultString, replacements);
+            identifiers.forEach((id, index) => {
+                if (index === lastIndex) {
+                    defaultString = newJson[id];
+                } else if (index === 0) {   
+                    newJson = this.i18nJson[id];
+                } else {
+                    newJson = newJson[id];
+                }
+            });
+
+            if (defaultString === undefined || defaultString === null) {
+                defaultString = orginalDefaultString;
+            }
+
+            if (replacements !== null) {
+                defaultString = this.replace(defaultString, replacements);
+            }            
         }
 
         return defaultString;
