@@ -22,10 +22,6 @@ export class I18n {
             let newJson: { [index: string] : any } = null;
 
             identifiers.forEach((id, index) => {
-                // if (newJson[id] === undefined) {
-                //     return;
-                // } 
-
                 if (index === 0) {
                     newJson = this.i18nJson[id];
                 } else if (index === lastIndex) {
