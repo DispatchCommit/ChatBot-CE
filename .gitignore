@@ -3,6 +3,7 @@ addons/
 typings/
 i18n/
 *.sqlite
+appledeath.json
 coinbot.json
 raid.json
 

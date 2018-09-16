@@ -52,6 +52,7 @@ export class Parser {
                 messageId: <number> data.data[1],
                 createdAt: <number> data.data[8],
                 username: <string> data.data[3][1],
+                userRole: <string> data.data[3][3],
                 userId: <string> data.data[3][7]
             };
 

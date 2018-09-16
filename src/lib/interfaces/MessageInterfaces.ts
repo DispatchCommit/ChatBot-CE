@@ -10,6 +10,7 @@ export interface IChatMessage extends IMessage {
     user?: any[];
     username: string;
     userId: string;
+    userRole: string;
     createdAt: number;
 }
 
