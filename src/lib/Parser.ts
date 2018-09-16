@@ -103,46 +103,68 @@ export class Parser {
     private loadAddons(): void {
         let addonSpinner = this.log.info("Loading bot addons.");
         let addonFolders = this.helper.getFolders(process.env.ADDON_FOLDER);
+
+        let loadAfter: { [index: string] : Array<string> } = {};
         
         for (let index = 0; index < addonFolders.length; index++) {
             const element = addonFolders[index];
-            let addon;
-            let packageFile;
-            let onChatMessage = "onChatMessage";
-            let onEraseMessage = "onEraseMessage";
 
             try {
                 let module = path.resolve(process.env.ADDON_FOLDER + "/" + element);
-                addon = require(module);
-                packageFile = JSON.parse(fs.readFileSync(path.resolve(module + "/package.json"), "utf8"));
+                let packageFile = JSON.parse(fs.readFileSync(path.resolve(module + "/package.json"), "utf8"));
 
-                this.log.info("Successfully required addon '" + element + "'");
-                
-                if ("constructor" in addon) {
-                    addon.constructor(this.api, this.helper, this.log.child({
-                        widget_type: packageFile.name,
-                    }), this.pubsub, new I18n(packageFile.name));
-                }
+                if (packageFile.chatbotce !== undefined && packageFile.chatbotce.loadAfter !== undefined) {
+                    if (loadAfter[packageFile.name] === undefined) {
+                        loadAfter[packageFile.chatbotce.loadAfter] = [element];
+                    } else {
+                        loadAfter[packageFile.chatbotce.loadAfter].push(element);
+                    }
+                } else {
+                    this.loadAddon(module, packageFile);
 
-                if ("commands" in addon) {
-                    for (let commandIndex = 0; commandIndex < addon.commands.length; commandIndex++) {
-                        if (addon.commands[commandIndex] in addon) {
-                            this.commands[addon.commands[commandIndex]] = addon[addon.commands[commandIndex]];
-                        }
+                    if (loadAfter[packageFile.name] !== undefined && loadAfter[packageFile.name].length > 0) {
+                        loadAfter[packageFile.name].forEach((addonToLoad: any) => {
+                            let newModule = path.resolve(process.env.ADDON_FOLDER + "/" + addonToLoad);
+                            let newPackage = JSON.parse(fs.readFileSync(path.resolve(newModule + "/package.json"), "utf8"));
+
+                            this.loadAddon(newModule, newPackage);
+                        });
                     }
                 }
-
-                if (onChatMessage in addon) {
-                    this.events.onChatMessage.push(addon[onChatMessage]);
-                }
-
-                if (onEraseMessage in addon) {
-                    this.events.onEraseMessage.push(addon[onEraseMessage]);
-                }
             } catch (error) {
-                this.log.warn("Failed to load the addon '" + element + "'. Message '" + error.message + "'.");
+                this.log.warn("Failed to load the addon '" + element + "'. " + error.toString());
                 continue;
             }
+        }
+    }
+
+    private loadAddon(addonPath: any, packageFile: any): void {
+        let addon = require(addonPath);
+        let onChatMessage = "onChatMessage";
+        
+        let onEraseMessage = "onEraseMessage";
+        this.log.info("Successfully required addon '" + packageFile.name + "'");
+                
+        if ("constructor" in addon) {
+            addon.constructor(this.api, this.helper, this.log.child({
+                widget_type: packageFile.name,
+            }), this.pubsub, new I18n(packageFile.name));
+        }
+
+        if ("commands" in addon) {
+            for (let commandIndex = 0; commandIndex < addon.commands.length; commandIndex++) {
+                if (addon.commands[commandIndex] in addon) {
+                    this.commands[addon.commands[commandIndex]] = addon[addon.commands[commandIndex]];
+                }
+            }
+        }
+
+        if (onChatMessage in addon) {
+            this.events.onChatMessage.push(addon[onChatMessage]);
+        }
+
+        if (onEraseMessage in addon) {
+            this.events.onEraseMessage.push(addon[onEraseMessage]);
         }
     }
 }
