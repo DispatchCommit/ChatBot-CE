@@ -22,10 +22,18 @@ export class I18n {
             let newJson: { [index: string] : any } = null;
 
             identifiers.forEach((id, index) => {
-                if (index === lastIndex) {
-                    defaultString = newJson[id];
-                } else if (index === 0) {   
+                // if (newJson[id] === undefined) {
+                //     return;
+                // } 
+
+                if (index === 0) {
                     newJson = this.i18nJson[id];
+                } else if (index === lastIndex) {
+                    if (newJson !== undefined && newJson[id] !== undefined) {
+                        defaultString = newJson[id];
+                    } else {
+                        return;
+                    }
                 } else {
                     newJson = newJson[id];
                 }
