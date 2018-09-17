@@ -3,6 +3,7 @@
   "version": "1.0.0-beta.4",
   "description": "A community chat bot for StreamMe",
   "private": false,
+  "bin": "dist/ChatBotCE.js",
   "main": "typings/ChatBotCE",
   "typings": "typings/ChatBotCE",
   "scripts": {
